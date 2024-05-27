@@ -1,0 +1,31 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity ripplecarryadder is
+Port ( a :in STD_LOGIC_VECTOR (3 downto 0);
+b : in STD_LOGIC_VECTOR (3 downto 0);
+cin : in STD_LOGIC;
+s :out STD_LOGIC_VECTOR (3 downto 0);
+cout : out STD_LOGIC);
+
+end ripplecarryadder;
+
+architecture Behavioral of ripplecarryadder is
+component FA is
+Port ( af : in STD_LOGIC;
+bf : in STD_LOGIC;
+cin : in STD_LOGIC;
+sf : out STD_LOGIC;
+cout : out STD_LOGIC);
+
+end component;
+
+signal c : STD_LOGIC_VECTOR (2 downto 0);
+begin
+fa1:FA port map(a(0),b(0),cin,s(0),c(0));
+fa2:FA port map(a(1),b(1),c(0),s(1), c(1));
+fa3:FA port map(a(2),b(2),c(1),s(2), c(2));
+fa4:FA port map(a(3),b(3),c(2),s(3),cout);
+
+end Behavioral;

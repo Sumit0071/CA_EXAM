@@ -1,0 +1,35 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+
+
+
+entity fulbehaviour is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+cin : in STD_LOGIC;
+s : out STD_LOGIC;
+cout : out STD_LOGIC);
+
+end fulbehaviour;
+
+architecture Behavioral of fulbehaviour is
+begin
+process(a,b,cin)
+variable sw: std_logic_vector(2 downto 0);
+begin
+sw(0):=cin;
+sw(1):=b;
+sw(2):=a;
+
+case sw is
+when "000" => s<='0';cout<='0';
+when "001" => s<='1'; cout<='0';
+when "010" => s<='1'; cout<='0';
+when "011" => s<='0'; cout<='1';
+when "100" => s<='1'; cout<='0';
+when "101" => s<='0'; cout<='1';
+when "110" => s<='0'; cout<='1';
+when others => s<='1'; cout<='1';
+end case;
+end process;
+end Behavioral;

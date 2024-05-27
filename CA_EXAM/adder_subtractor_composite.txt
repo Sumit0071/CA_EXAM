@@ -1,0 +1,33 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity addsub is
+Port ( a : in STD_LOGIC_VECTOR (3 downto 0);
+b : in STD_LOGIC_VECTOR (3 downto 0);
+sw : in STD_LOGIC;
+s : out STD_LOGIC_VECTOR (3 downto 0);
+cout : out STD_LOGIC);
+end addsub;
+
+architecture Behavioral of addsub is
+component FA is
+Port ( af : in STD_LOGIC;
+bf : in STD_LOGIC;
+cin : in STD_LOGIC;
+sf : out STD_LOGIC;
+cout : out STD_LOGIC);
+end component;
+signal sig : STD_LOGIC_VECTOR (3 downto 0);
+signal cp : STD_LOGIC_VECTOR (2 downto 0);
+begin
+sig(0)<=sw XOR b(0);
+sig(1)<=sw XOR b(1);
+sig(2)<=sw XOR b(2);
+sig(3)<=sw XOR b(3);
+
+fa1:FA port map(a(0),sig(0),sw,s(0),cp(0));
+fa2:FA port map(a(1),sig(1),cp(0),s(1),cp(1));
+fa3:FA port map(a(2),sig(2),cp(1),s(2),cp(2));
+fa4:FA port map(a(3),sig(3),cp(2),s(3),cout);
+
+end Behavioral;
