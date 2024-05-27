@@ -1,0 +1,22 @@
+library IEEE;
+use ieee.std_logic_1164.all;
+entity decodernew is
+  Port(
+
+a1,b1,en:in STD_LOGIC;
+z1:out STD_LOGIC_VECTOR(7 downto 0)
+  );  
+end decodernew; 
+architecture Behavioral of decodernew is 
+  component decoder1 is
+Port(
+  a,b,enable:in STD_LOGIC;
+  z:out STD_LOGIC_VECTOR(3 downto 0));
+
+end component;
+signal nen: STD_LOGIC;
+begin
+  nen<= NOT en;
+  x1:decoder1 port map(nen,a1,b1,z1(3 downto 0));
+    x2:decoder1 port map(nen,a1,b1,z1(7 downto 4));
+    end Behavioral;
